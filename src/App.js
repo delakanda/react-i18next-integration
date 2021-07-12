@@ -1,23 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import { Button, SelectPicker } from 'rsuite';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+
+  const [selectedLang, setSelectedLang] = useState('en')
+
+  const { t, i18n } = useTranslation(); 
+
+  const changeLang = useCallback(
+    (data) => {
+      setSelectedLang(data);
+      i18n.changeLanguage(data);
+    },
+    [i18n],
+  )
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <SelectPicker data={[
+        {
+          "label": "English",
+          "value": "en",
+        },
+        {
+          "label": "French",
+          "value": "fr",
+        },
+      ]}
+      value={selectedLang} 
+      onChange={changeLang}
+      style={{ width: 224, marginTop: '100px', marginBottom: '100px' }} />
+
+      <br/>
+
+      {t('test.displayText')}
+
+      <br/>
+      <br/>
+      <Button appearance="ghost"> {t('buttonTexts.hello')} </Button>
+      
     </div>
   );
 }

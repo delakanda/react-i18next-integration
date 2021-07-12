@@ -1,0 +1,8 @@
+{
+  "test": {
+    "displayText": "Ceci est un texte"
+  },
+  "buttonTexts": {
+    "hello": "Bonjour le monde!"
+  }
+}
